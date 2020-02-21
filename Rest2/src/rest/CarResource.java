@@ -21,7 +21,6 @@ public class CarResource {
     }
 
     @POST
-    @Path("/add")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public String add(Car car) {
@@ -36,20 +35,18 @@ public class CarResource {
     }
 
     @GET
-    @Path(("/get"))
+    @Path("/{id}")
+    public Car getCar(@PathParam("id") Long id) {
+        return carDAO.get(id);
+    }
+
+    @GET
     @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
     public List<Car> getAll() {
         return carDAO.getAll();
     }
 
-    @GET
-    @Path("{id}")
-    public Car getCar(@PathParam("id") Long id) {
-        return carDAO.get(id);
-    }
-
     @PUT
-    @Path("/update")
     public void updateCar(Car car) {
         carDAO.updateCar(car);
     }
