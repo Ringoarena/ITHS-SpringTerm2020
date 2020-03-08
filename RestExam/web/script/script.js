@@ -1,4 +1,3 @@
-var printedIDs = [];
 var localLastId = 0;
 
 function submit(messageContent) {
@@ -33,22 +32,13 @@ function fetch() {
     var request = new XMLHttpRequest();
     request.open("GET", "http://192.168.23.194:8080/RestExam_war_exploded/rest/messages", false);
     request.setRequestHeader("Accept", "application/json");
-    // request.setRequestHeader("lastId", printedIDs.length.toString());
     request.setRequestHeader("lastId", localLastId);
     request.send();
     var messages = JSON.parse(request.responseText);
     var i;
     for (i = 0; i < messages.length; i++) {
-        // control(messages[i]);
         log(messages[i].content);
         localLastId = messages[i].id;
-    }
-}
-
-function control(message) {
-    if (!printedIDs.includes(message.id)) {
-        log(message.content);
-        printedIDs.push(message.id);
     }
 }
 
