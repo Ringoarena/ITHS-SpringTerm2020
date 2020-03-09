@@ -4,7 +4,7 @@ function submit(messageContent) {
     var message = {};
     message.content = messageContent;
     var request = new XMLHttpRequest();
-    request.open("POST", "http://192.168.23.194:8080/RestExam_war_exploded/rest/messages", false);
+    request.open("POST", "http://192.168.0.156:8080/RestExam_war_exploded/rest/messages", false);
     request.setRequestHeader("Content-type", "application/json");
     request.setRequestHeader("Accept", "application/json");
     request.send(JSON.stringify(message));
@@ -16,7 +16,6 @@ function readInput(ev) {
     if (ev.keyCode === 13) {
         submit(ev.target.textContent);
         ev.target.textContent = "";
-        ev.preventDefault();
     }
 }
 
@@ -30,7 +29,7 @@ function poll() {
 
 function fetch() {
     var request = new XMLHttpRequest();
-    request.open("GET", "http://192.168.23.194:8080/RestExam_war_exploded/rest/messages", false);
+    request.open("GET", "http://192.168.0.156:8080/RestExam_war_exploded/rest/messages", false);
     request.setRequestHeader("Accept", "application/json");
     request.setRequestHeader("lastId", localLastId);
     request.send();
@@ -41,7 +40,3 @@ function fetch() {
         localLastId = messages[i].id;
     }
 }
-
-
-
-    
